@@ -11,16 +11,26 @@ public class Logica extends PApplet {
 
 	private LinkedList<Perro> listaPerro;
 	private PApplet app;
+	private PerroEdadCompare perroEdadCompare;
+	private PerroNombreCompare perroNombreCompare;
+	private PerroRazaCompare perroRazaCompare;
+	private PerroFechaNacimientoCompare perroFechaNacimientoCompare;
 
 	public Logica(PApplet app) {
+
+		perroEdadCompare = new PerroEdadCompare();
+		perroNombreCompare = new PerroNombreCompare();
+		perroRazaCompare = new PerroRazaCompare();
+		perroFechaNacimientoCompare = new PerroFechaNacimientoCompare();
 
 		this.app = app;
 		listaPerro = new LinkedList<Perro>();
 
-		txtUno = app.loadStrings("Uno.txt");
-		txtDos = app.loadStrings("Dos.txt");
+		txtUno = app.loadStrings("../data/imports/Uno.txt");
+		txtDos = app.loadStrings("../data/imports/Dos.txt");
 	}
 
+	
 	public void listaPerros() {
 		for (int i = 0; i < txtDos.length; i++) {
 			String[] listaDos = txtDos[i].split(",");
@@ -40,9 +50,25 @@ public class Logica extends PApplet {
 
 	public void sortList(char list) {
 		switch (list) {
-		
-		case 'i' :
+
+		case 'i':
 			Collections.sort(listaPerro);
+			break;
+
+		case 'n':
+			Collections.sort(listaPerro, perroNombreCompare);
+			break;
+
+		case 'e':
+			Collections.sort(listaPerro, perroEdadCompare);
+			break;
+
+		case 'r':
+			Collections.sort(listaPerro, perroRazaCompare);
+			break;
+
+		case 'f':
+			Collections.sort(listaPerro, perroFechaNacimientoCompare);
 			break;
 
 		}
